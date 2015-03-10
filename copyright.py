@@ -5,11 +5,11 @@ import sys
 
 
 # 插入版本信息
-def insert_copyright(matched_copyright, java_file):
+def insert_copyright(java_file, my_copyright):
     f = open(java_file, 'r')
     contents = f.readlines()
     f.close()
-    contents.insert(0, matched_copyright)
+    contents.insert(0, my_copyright)
     f = open(java_file, 'w')
     contents = ''.join(contents)
     f.write(contents)
@@ -17,7 +17,7 @@ def insert_copyright(matched_copyright, java_file):
 
 
 # 判断Java文件的版本信息是否匹配
-def find_copyright(matched_copyright, java_file):
+def find_copyright(java_file, my_copyright):
     f = open(java_file)
     cr_buf = []
     # 获取 package 之前的代码
@@ -36,7 +36,7 @@ def find_copyright(matched_copyright, java_file):
         # Exists
         copyright_exists,
         # Matched
-        copyright_exists and matched_copyright in ''.join(cr_buf),
+        copyright_exists and my_copyright in ''.join(cr_buf),
         # Content
         content
     )
@@ -44,7 +44,7 @@ def find_copyright(matched_copyright, java_file):
 
 # 处理版权信息
 def perform_copyright(java_file, my_copyright):
-    rs = find_copyright(java_file)
+    rs = find_copyright(java_file, my_copyright)
     # Copyright exists and matched
     if rs[1]:
         print "- 此Java源文件已存在版权声明"

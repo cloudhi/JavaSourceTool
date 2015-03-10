@@ -60,7 +60,7 @@ def perform_copyright(java_file):
         insert_copyright(java_file)
     # Exists , but not matched
     else:
-        print '> 此Java源文件已存在其它版本信息'
+        print '> 此Java源文件已存在其它版本信息: %s' % java_file
 
 
 # 遍历Java源文件目录
